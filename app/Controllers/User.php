@@ -177,53 +177,55 @@ class User extends BaseController
         return view('user/ubah_password', $data);
     }
 
-    public function updatePassword()
-    {
-        $id = session()->get('id_user');
+   public function updatePassword()
+{
+    $id = session()->get('id_user');
 
-        $validate = $this->validate([
-            'password_lama' => [
-                'label' => 'Password Lama',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} Tidak Boleh Kosong.',
-                ]
-            ],
-            'password_baru' => [
-                'label' => 'Password Baru',
-                'rules' => 'required|min_length[8]|regex_match[/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s])[\w\d\W]{8,}$/]',
-                'errors' => [
-                    'required' => '{field} Tidak Boleh Kosong.',
-                    'min_length' => '{field} minimal 8 karakter.',
-                    'regex_match' => '{field} mengandung huruf besar, huruf kecil, angka, dan karakter khusus '
-                ]
-            ],
-            're_password' => [
-                'label' => 'Konfirmasi Password Baru',
-                'rules' => 'required|matches[password_baru]',
-                'errors' => [
-                    'required' => '{field} Tidak Boleh Kosong.',
-                    'matches' => 'Konfirmasi password tidak sesuai dengan password baru.',
-                ]
+    $validate = $this->validate([
+        'password_lama' => [
+            'label' => 'Password Lama',
+            'rules' => 'required',
+            'errors' => [
+                'required' => '{field} Tidak Boleh Kosong.',
             ]
-        ]);
-        if ($validate) {
-            $currentPassword = esc($this->request->getPost('password_lama'));
-            $newPassword = esc($this->request->getPost('password_baru'));
+        ],
+        'password_baru' => [
+            'label' => 'Password Baru',
+            'rules' => 'required|min_length[8]|regex_match[/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s])[\w\d\W]{8,}$/]',
+            'errors' => [
+                'required' => '{field} Tidak Boleh Kosong.',
+                'min_length' => '{field} minimal 8 karakter.',
+                'regex_match' => '{field} harus mengandung huruf besar, huruf kecil, angka, dan karakter khusus.'
+            ]
+        ],
+        're_password' => [
+            'label' => 'Konfirmasi Password Baru',
+            'rules' => 'required|matches[password_baru]',
+            'errors' => [
+                'required' => '{field} Tidak Boleh Kosong.',
+                'matches' => 'Konfirmasi password tidak sesuai dengan password baru.',
+            ]
+        ]
+    ]);
 
-            $users = $this->userModel->getUserByid($id);
+    if ($validate) {
+        $currentPassword = esc($this->request->getPost('password_lama'));
+        $newPassword = esc($this->request->getPost('password_baru'));
 
-            if ($users && $currentPassword) {
-                $hashedPassword = password_hash("$newPassword", PASSWORD_DEFAULT);
+        $users = $this->userModel->getUserById($id);
 
-                // Update password dalam database
-                $this->userModel->updatePassword($id, $hashedPassword);
-                return redirect()->back()->with('pesan', 'Password berhasil diperbarui.');
-            } else {
-                return redirect()->back()->with('passlama', 'Password lama salah.')->withInput();
-            }
+        if ($users && password_verify($currentPassword, $users['password'])) {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            // Update password dalam database
+            $this->userModel->updatePassword($id, $hashedPassword);
+            return redirect()->back()->with('pesan', 'Password berhasil diperbarui.');
         } else {
-            return redirect()->back()->with('error', $this->validator->listErrors())->withInput();
+            return redirect()->back()->with('passlama', 'Password lama salah.')->withInput();
         }
+    } else {
+        return redirect()->back()->with('error', $this->validator->listErrors())->withInput();
     }
+}
+
 }

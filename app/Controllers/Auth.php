@@ -43,22 +43,26 @@ class Auth extends BaseController
             ]
         ];
 
-        if (!$this->validate($validationRules)) {
-            return redirect()->back()->withInput()->with('pesan', 'Username dan Password Tidak Boleh Kosong');
-        }
-
-        if ($user && $password) {
-            session()->set('isLogin', true);
-            session()->set('id_user', $user['id_user']);
-            session()->set('username', $user['username']);
-            session()->set('role', $user['role']);
-            // Redirect all roles to the same dashboard
-            return redirect()->to(base_url('dashboard'));
-        } else {
-            session()->setFlashdata('pesan', 'Username atau password salah.');
-            return redirect()->to(base_url('/'))->withInput();
-        }
+      if (!$this->validate($validationRules)) {
+        return redirect()->back()->withInput()->with('pesan', 'Username dan Password tidak boleh kosong.');
     }
+
+   
+    $userModel = new \App\Models\UserModel();
+    $user = $userModel->where('username', $username)->first();
+
+
+    if ($user && password_verify($password, $user['password'])) {
+        session()->set('isLogin', true);
+        session()->set('id_user', $user['id_user']);
+        session()->set('username', $user['username']);
+        session()->set('role', $user['role']);
+        return redirect()->to(base_url('dashboard'));
+    } else {
+        session()->setFlashdata('pesan', 'Username atau Password salah.');
+        return redirect()->to(base_url('/'))->withInput();
+    }
+}
 
 
     public function logout() //untuk proses logout
