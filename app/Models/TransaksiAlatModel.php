@@ -22,18 +22,18 @@ class TransaksiAlatModel extends Model
     public function kurangiJumlahTransAlat($id_trans_alat, $jumlah_pengemb_alat)
     {
         return $this->set('jumlah_trans_alat', "jumlah_trans_alat - $jumlah_pengemb_alat", false)
-                    ->where('id_trans_alat', $id_trans_alat)
-                    ->update();
+            ->where('id_trans_alat', $id_trans_alat)
+            ->update();
     }
 
     public function getTransAlat()
     {
         return $this->db->table('transaksi')
-        ->select('transaksi.*, alat.nama_alat, alat.harga, kategori.nama_kategori')
-        ->join('alat', 'alat.id_alat = transaksi.id_alat')
-        ->join('kategori', 'kategori.id_kategori = alat.id_kategori')
-        ->get()
-        ->getResultArray();
+            ->select('transaksi.*, alat.nama_alat, alat.harga, kategori.nama_kategori')
+            ->join('alat', 'alat.id_alat = transaksi.id_alat')
+            ->join('kategori', 'kategori.id_kategori = alat.id_kategori')
+            ->get()
+            ->getResultArray();
     }
 
     public function filter($tglawal, $tglakhir)
@@ -42,7 +42,7 @@ class TransaksiAlatModel extends Model
             ->where('tgl_trans_alat <=', $tglakhir)
             ->join('alat', 'alat.id_alat = transaksi.id_alat')
             ->join('kategori', 'kategori.id_kategori = alat.id_kategori')
-            ->select('transaksi.*, alat.nama_alat, kategori.nama_kategori, alat.ukuran, alat.warna, alat.jumlah')
+            ->select('transaksi.*, alat.*, kategori.*')
             ->findAll();
     }
 }

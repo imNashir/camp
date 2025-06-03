@@ -28,9 +28,10 @@
 						<div class="form-group">
 							<label for="">Tanggal Akhir</label>
 							<input type="date" name="tgl_akhir" class="form-control" required>
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-block"><i class="fas fa-print mr-2"></i>Cetak Data</button>
-						</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block"><i
+										class="fas fa-print mr-2"></i>Cetak Data</button>
+							</div>
 					</form>
 					</p>
 				</div>

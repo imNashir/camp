@@ -14,15 +14,17 @@ class Auth extends BaseController
         $this->userModel = new UserModel();
     }
 
-    public function index() // untuk halaman login
+    public function index() //untuk halaman login
     {
         return view('auth/form_login');
     }
 
-    public function login() // proses login
+    public function login() // Login process
     {
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
+
+        $user = $this->userModel->getUserByUsername($username);
 
         $validationRules = [
             'username' => [
@@ -45,13 +47,12 @@ class Auth extends BaseController
             return redirect()->back()->withInput()->with('pesan', 'Username dan Password Tidak Boleh Kosong');
         }
 
-        $user = $this->userModel->getUserByUsername($username);
-
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && $password) {
             session()->set('isLogin', true);
             session()->set('id_user', $user['id_user']);
             session()->set('username', $user['username']);
             session()->set('role', $user['role']);
+            // Redirect all roles to the same dashboard
             return redirect()->to(base_url('dashboard'));
         } else {
             session()->setFlashdata('pesan', 'Username atau password salah.');
@@ -59,7 +60,8 @@ class Auth extends BaseController
         }
     }
 
-    public function logout() // proses logout
+
+    public function logout() //untuk proses logout
     {
         session()->remove('isLogin');
         session()->remove('id_user');

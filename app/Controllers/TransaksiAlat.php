@@ -33,7 +33,11 @@ class TransaksiAlat extends BaseController
         $id_trans_alat = $this->request->getPost('id_trans_alat');
         $total_harga = $this->request->getPost('total_harga');
 
-        // Data untuk tabel pengembalian
+        $total = 0;
+        $query = $this->transaksiAlatModel->where('id_alat', $id_alat)->findAll();
+        foreach ($query as $row) {
+            $total += $row['jumlah_trans_alat'];
+        }
         $dataPengembalian = [
             'id_alat' => $id_alat,
             'jumlah_pengemb_alat' => $jumlah_pengemb_alat,
@@ -42,6 +46,10 @@ class TransaksiAlat extends BaseController
             'total_harga' => $total_harga,
             'id_trans_alat' => $id_trans_alat
         ];
+        // Menambah data ke tabel pengembalian
+        if ($jumlah_pengemb_alat > $total) {
+            return redirect()->back()->with('error', 'Jumlah pengembalian alat tidak boleh lebih besar dari total alat');
+        }
 
         // Menambah data ke tabel pengembalian
         if (!$pengembalianAlatModel->tambahPengembalian($dataPengembalian)) {
@@ -264,7 +272,6 @@ class TransaksiAlat extends BaseController
             'tgl_akhir' => $tglakhir,
             'result' => $this->transaksiAlatModel->filter($tglawal, $tglakhir)
         ];
-
         if (!empty($data['result'])) {
             $html = view('transaksi/filtered-data', $data);
             $dompdf->loadHtml($html);
