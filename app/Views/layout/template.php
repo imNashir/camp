@@ -84,9 +84,9 @@
 
 		<footer class="main-footer mt-2">
 			<div class="float-right d-none d-sm-inline">
-				PlinPlan - 2024
+				PlinPlan - 2025
 			</div>
-			<strong>Copyright &copy; 2024</strong> Plinplan All rights reserved.
+			<strong>Copyright &copy; 2025</strong> Plinplan All rights reserved.
 		</footer>
 	</div>
 
