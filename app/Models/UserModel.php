@@ -14,7 +14,7 @@ class UserModel extends Model
         'password',
         'role'
     ];
-    
+
 
     public function getUser($id = false)
     {
