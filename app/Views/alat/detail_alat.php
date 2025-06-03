@@ -11,7 +11,8 @@
 						<div class="row">
 							<div class="col-12 col-sm-6">
 								<div class="col-12">
-									<img src="<?= base_url('/img_data' . '/' . $alat['gambar']); ?>" class="product-image" alt="Product Image">
+									<img src="<?= base_url('img_data/' . (!empty($alat['gambar']) ? $alat['gambar'] : 'default_image.jpg')) ?>"
+										class="product-image" alt="Product Image">
 								</div>
 							</div>
 							<div class="col-12 col-sm-6">

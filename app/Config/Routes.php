@@ -52,7 +52,7 @@ $routes->group('transaksi', static function ($routes) {
 	$routes->get('admin', 'transaksiAlat::indexs');
 	$routes->get('tambah', 'transaksiAlat::tambahTransAlat');
 	$routes->post('simpan', 'transaksiAlat::simpanTransAlat');
-	$routes->get('delete/(:num)', 'transaksiAlat::hapusTransAlat/$1');
+	$routes->delete('(:num)', 'transaksiAlat::hapusTransAlat/$1');
 	$routes->get('rep-transaksi', 'transaksiAlat::repTrans');
 	$routes->get('filtered-data', 'transaksiAlat::filter');
 	$routes->get('adm', 'transaksiAlat::dataTransAlat_adm');

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	
+
 	<div class="container">
 		<div class="img">
 			<img src="<?= base_url(); ?>img/plinplan.jpg">
@@ -33,7 +33,8 @@
 					</div>
 					<div class="div">
 						<h5>Username</h5>
-						<input type="text" class="input" name="username" autocomplete="off" value="<?= old('username'); ?>">
+						<input type="text" class="input" name="username" autocomplete="off"
+							value="<?= old('username'); ?>">
 					</div>
 				</div>
 				<div class="input-div pass">
@@ -42,13 +43,14 @@
 					</div>
 					<div class="div">
 						<h5>Password</h5>
-						<input type="text" class="input" name="password" autocomplete="off" value="<?= old('password'); ?>">
+						<input type="password" class="input" name="password" autocomplete="off"
+							value="<?= old('password'); ?>">
 					</div>
 				</div>
-				
+
 				<button type="submit" class="btn">Login</button>
 			</form>
-			</div>
+		</div>
 	</div>
 	<script>
 		const inputs = document.querySelectorAll(".input");
