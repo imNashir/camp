@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ccb6dd0af8f4e4ccb12bfff4864ac49",
+    "content-hash": "b0cb0c4c0926258c312cee6b9f96634c",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -297,16 +297,16 @@
         },
         {
             "name": "hermawan/codeigniter4-datatables",
-            "version": "v0.7.2",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hermawanramadhan/CodeIgniter4-DataTables.git",
-                "reference": "54057bf0facc171f4be0c490a257dfa46eb7e0d9"
+                "reference": "cdd5c2b1f939528b4825d394db157396e8848a1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hermawanramadhan/CodeIgniter4-DataTables/zipball/54057bf0facc171f4be0c490a257dfa46eb7e0d9",
-                "reference": "54057bf0facc171f4be0c490a257dfa46eb7e0d9",
+                "url": "https://api.github.com/repos/hermawanramadhan/CodeIgniter4-DataTables/zipball/cdd5c2b1f939528b4825d394db157396e8848a1f",
+                "reference": "cdd5c2b1f939528b4825d394db157396e8848a1f",
                 "shasum": ""
             },
             "require": {
@@ -333,9 +333,9 @@
             "description": "Serverside Datatables library for CodeIgniter4",
             "support": {
                 "issues": "https://github.com/hermawanramadhan/CodeIgniter4-DataTables/issues",
-                "source": "https://github.com/hermawanramadhan/CodeIgniter4-DataTables/tree/v0.7.2"
+                "source": "https://github.com/hermawanramadhan/CodeIgniter4-DataTables/tree/v0.8.0"
             },
-            "time": "2024-04-27T07:44:11+00:00"
+            "time": "2025-01-09T02:06:46+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -2443,12 +2443,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

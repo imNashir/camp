@@ -13,7 +13,7 @@
         "php": "^8.1",
         "codeigniter4/framework": "^4.0",
         "dompdf/dompdf": "^3.0",
-        "hermawan/codeigniter4-datatables": "^0.7.2"
+        "hermawan/codeigniter4-datatables": "^0.8.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

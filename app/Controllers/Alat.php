@@ -38,7 +38,7 @@ class Alat extends BaseController
             ->select('id_alat, nama_alat, nama_kategori, ukuran, warna, jumlah')
             ->join('kategori', 'kategori.id_kategori = barang.id_kategori');
 
-        return DataTable::of($builder)
+        return DataTable::of(builder: $builder)
             ->add('status', function ($row) {
                 if ($row->jumlah == 0) {
                     return '<small class="badge badge-danger"> Habis</small>';
